@@ -1,0 +1,22 @@
+{
+  "name": "prime-number-search",
+  "version": "0.0.1",
+  "description": "Prime Number Search",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "prime",
+    "number",
+    "search"
+  ],
+  "author": "Aleksander Switalski",
+  "license": "MIT",
+  "devDependencies": {
+    "assert": "^1.4.0"
+  }
+}
