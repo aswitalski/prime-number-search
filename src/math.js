@@ -1,6 +1,9 @@
 'use strict';
 
 const normalize = (number) => {
+    if (number instanceof Array) {
+        number = number.join('');
+    }
     while (number.indexOf('0') === 0) {
         number = number.substring(1);
     }
@@ -8,26 +11,27 @@ const normalize = (number) => {
 };
 
 const isGreater = (number, secondNumber) => {
-
-    //console.log('isGreater', number, secondNumber);
-
+    number = normalize(number);
+    secondNumber = normalize(secondNumber);
     if (number.length === secondNumber.length) {
         for (let i = 0; i < number.length; i++) {
-            const digit = parseInt(number[i]);
-            const secondDigit = parseInt(secondNumber[i]);
+            const digit = Number(number[i]);
+            const secondDigit = Number(secondNumber[i]);
             if (digit > secondDigit) {
                 return true;
             } else if (digit < secondDigit) {
                 return false;
             }
         }
-        return false;
+        return null;
     } else {
         return number.length > secondNumber.length;
     }
 };
 
-const getDigits = (number) => number.split('');
+const isGreaterOrEqual = (number, secondNumber) => isGreater(number, secondNumber) !== false;
+
+const getDigits = (number) => normalize(number).split('').map(Number);
 
 const subtract = (number, subtrahend) => {
 
@@ -50,8 +54,8 @@ const subtract = (number, subtrahend) => {
     for (let step = 1; step <= digits.length; step++) {
         const index = digits.length - step;
 
-        const digit = parseInt(digits[index]);
-        const sub = parseInt(subs[index - digits.length + subs.length] || '0');
+        const digit = Number(digits[index]);
+        const sub = Number(subs[index - digits.length + subs.length] || '0');
 
         let difference = digit - sub + carry;
         if (difference < 0) {
@@ -67,24 +71,45 @@ const subtract = (number, subtrahend) => {
     return normalize(result.join(''));
 };
 
-const isDivisible = (number, divisor) => {
+const isDivisible = (number, divisor) => modulo(number, divisor) === 0;
 
-    //console.log('isDivisible', number, divisor);
-    let remainder = number;
+const modulo = (number, divisor) => {
 
-    while (isGreater(remainder, divisor)) {
-        // TODO: subtract decimal multiplication
-        remainder = subtract(remainder, divisor);
+    //console.log(`Dividing ${number} by ${divisor}`);
+
+    let remainder = getDigits(number);
+    divisor = getDigits(divisor);
+
+    //console.log('Remainder:', remainder);
+
+    while (isGreaterOrEqual(remainder, divisor)) {
+
+        let dividend = remainder.slice(0, divisor.length);
+        //console.log('Dividend:', dividend);
+
+        let extra = 0;
+        while (!isGreaterOrEqual(dividend, divisor)) {
+            //console.log('Dividend smaller than divisor, adding one more digit');
+            dividend = remainder.slice(0, divisor.length + ++extra);
+            //console.log('Dividend:', dividend);
+        }
+
+        const difference = getDigits(subtract(dividend, divisor));
+        //console.log('Difference:', difference);
+
+        remainder.splice(0, dividend.length, ...difference);
+
         //console.log('Remainder:', remainder);
     }
 
-    const result = remainder === 0 || remainder === divisor;
-    //console.log('=>', result);
-    return result;
+    const result = remainder.join('');
+    //console.log('Result:', result);
+    return Number(result);
 };
 
 module.exports = {
     subtract,
+    modulo,
     isGreater,
     isDivisible
 };

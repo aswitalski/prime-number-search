@@ -5,7 +5,7 @@ const assert = require('assert');
 
 describe('Primary Numbers', function() {
 
-    this.timeout(3.5 * 60000);
+    this.timeout(15 * 60 * 1000);
 
     describe('Search', () => {
 
@@ -15,14 +15,23 @@ describe('Primary Numbers', function() {
             assert.deepEqual(primes, [2]);
         });
 
-        it('returns 2, 3, 5, 7, 11, 13, 17 as the first seven prime numbers', () => {
+        it('returns 2, 3, 5, 7, 11, 13, 17 as first seven prime numbers', () => {
 
             const primes = find(7);
             assert.deepEqual(primes, [2, 3, 5, 7, 11, 13, 17]);
         });
 
-        it.only('Searches for 1000 prime numbers', () => {
-           assert.equal(find(1000).length, 1000);
+        it('The 100th prime number is 541', () => {
+            const result = find(100);
+            assert.equal(result.pop(), 541);
+        });
+
+        it('The 1000th prime number is 7919', () => {
+           assert.equal(find(1000).pop(), 7919);
+        });
+
+        it.skip('The 5000th prime number is 48611', () => {
+           assert.equal(find(5000).pop(), 48611);
         });
     });
 

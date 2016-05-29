@@ -19,12 +19,16 @@ describe('Basic string mathematics', () => {
             assert.equal(math.isGreater('99', '100'), false);
         });
 
-        it('666 is not greater than 666', () => {
-            assert.equal(math.isGreater('666', '666'), false);
-        });
-
         it('14 is not greater than 23', () => {
             assert.equal(math.isGreater('14', '23'), false);
+        });
+
+        it('666 is not greater than 666', () => {
+            assert.equal(math.isGreater('666', '666'), null);
+        });
+
+        it('15 is equal 15', () => {
+            assert.equal(math.isGreater('15', '15'), null);
         });
     });
 
@@ -68,5 +72,19 @@ describe('Basic string mathematics', () => {
                 assert.equal(math.isDivisible(String(number), String(divisor)), false);
             });
         });
+    });
+
+    describe('Modulo', () => {
+
+        const divisible = [
+            [10000, 99, 1], [1257, 2, 1], [487799, 653, 8], ['123456789012345678901234', 3, 1]
+        ];
+
+        divisible.map(([number, divisor, result]) => {
+            it(`${number} modulo ${divisor}`, () => {
+                assert.equal(math.modulo(String(number), String(divisor)), result);
+            });
+        });
+
     });
 });

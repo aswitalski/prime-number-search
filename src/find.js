@@ -21,7 +21,7 @@ const isPrime = (number) => {
 
 const isPrimeWithCache = (number) => {
     return primes.every(prime =>
-    math.isGreater(prime, number) || math.isDivisible(number, prime) === false);
+    prime.length > (number.length + 1) / 2 || math.modulo(number, prime) !== 0);
 };
 
 const find = (count) => {
@@ -39,8 +39,10 @@ const find = (count) => {
             current = String(parseInt(current) + 2);
             //console.log('Checking:', current);
             if (isPrimeWithCache(current)) {
-                //console.log('Found new prime number:', current);
                 primes.push(current);
+                //if (primes.length % 100 === 0) {
+                //    console.log(`Found new prime number (${primes.length}):`, current);
+                //}
             }
             //console.log('Current:', current);
         }
