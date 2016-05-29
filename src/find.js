@@ -8,7 +8,7 @@ const isPrime = (number) => {
     let divisor = 2;
     while (math.isGreater(number, String(divisor))) {
         if (math.isDivisible(number, String(divisor))) {
-            //console.log(`Number ${number} is not prime, it's divisable by ${divisor}`);
+            //console.log(`Number ${number} is not prime, it's divisible by ${divisor}`);
             return false;
         } else {
             divisor++;
@@ -36,7 +36,7 @@ const find = (count) => {
         //console.log('Last known prime number:', current);
 
         while (primes.length < count) {
-            current = String(parseInt(current) + 2);
+            current = String(Number(current) + 2); // TODO: use own math mechanism
             //console.log('Checking:', current);
             if (isPrimeWithCache(current)) {
                 primes.push(current);

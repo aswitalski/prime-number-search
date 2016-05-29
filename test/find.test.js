@@ -26,12 +26,16 @@ describe('Primary Numbers', function() {
             assert.equal(result.pop(), 541);
         });
 
-        it('The 1000th prime number is 7919', () => {
+        it.skip('The 1000th prime number is 7919', () => {
            assert.equal(find(1000).pop(), 7919);
         });
 
         it.skip('The 5000th prime number is 48611', () => {
            assert.equal(find(5000).pop(), 48611);
+        });
+
+        it.skip('The 10000th prime number is 104729', () => {
+           assert.equal(find(10000).pop(), 104729);
         });
     });
 
