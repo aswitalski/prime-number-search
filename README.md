@@ -1,5 +1,7 @@
 # prime-number-search
 
+[![Build Status](https://snap-ci.com/aswitalski/prime-number-search/branch/master/build_image)](https://snap-ci.com/aswitalski/prime-number-search/branch/master)
+
 A just-for-fun prime number search mechanism utilizing own crud math algorithms.
 It operates on strings representing decimal numbers to allow finding numbers exceeding max safe integer value in JavaScript (9007199254740991).
  
