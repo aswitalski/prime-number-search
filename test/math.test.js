@@ -45,6 +45,17 @@ describe('Basic string mathematics', () => {
         it('451 + 548 = 999', () => {
             assert.equal(math.add('451', '548'), '999');
         });
+
+        describe('Beyond JS max safe integer', () => {
+
+            it('9007199254740991 + 59008 = 9007199254799999', () => {
+                assert.equal(math.add('9007199254740991', '59008'), '9007199254799999');
+            });
+
+            it('20000000000000000 + 20000000000000000 = 40000000000000000', () => {
+                assert.equal(math.add('20000000000000000', '20000000000000000'), '40000000000000000');
+            });
+        });
     });
 
     describe('Subtraction', () => {
@@ -77,6 +88,16 @@ describe('Basic string mathematics', () => {
             assert.equal(math.subtract('12345678', '23456789'), '-11111111');
         });
 
+        describe('Beyond JS max safe integer', () => {
+
+            it('9007199254740991 - 9007199254740992 = -1', () => {
+                assert.equal(math.subtract('9007199254740991', '9007199254740992'), '-1');
+            });
+
+            it('100000000000000000 - 98765432109876543 = 1234567890123457', () => {
+                assert.equal(math.subtract('100000000000000000', '98765432109876543'), '1234567890123457');
+            });
+        });
     });
 
     describe('Divisibility', () => {
