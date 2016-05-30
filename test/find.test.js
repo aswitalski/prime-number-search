@@ -3,9 +3,7 @@
 const find = require('../src/find');
 const assert = require('assert');
 
-describe('Primary Numbers', function() {
-
-    this.timeout(15 * 60 * 1000);
+describe('Primary Numbers', () => {
 
     describe('Search', () => {
 

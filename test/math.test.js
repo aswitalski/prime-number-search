@@ -3,9 +3,7 @@
 const math = require('../src/math');
 const assert = require('assert');
 
-describe('Basic string mathematics', function() {
-
-    this.timeout(15 * 60 * 1000);
+describe('Basic string mathematics', () => {
 
     describe('Number comparison', () => {
 

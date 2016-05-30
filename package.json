@@ -1,6 +1,6 @@
 {
   "name": "prime-number-search",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "Prime Number Search",
   "main": "index.js",
   "directories": {
@@ -9,10 +9,15 @@
   "scripts": {
     "test": "mocha"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aswitalski/prime-number-search.git"
+  },
   "keywords": [
     "prime",
     "number",
-    "search"
+    "search",
+    "javascript"
   ],
   "author": "Aleksander Switalski",
   "license": "MIT",
