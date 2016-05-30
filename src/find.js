@@ -1,8 +1,7 @@
 'use strict';
 
 const math = require('./math');
-
-const primes = ['2', '3'];
+const cache = require('./cache');
 
 const isPrime = (number) => {
     let divisor = 2;
@@ -31,24 +30,25 @@ const canBeDivisor = (number, divisor) => {
     }
 };
 
-const isPrimeWithCache = (number) => {
-    return primes.every(prime =>
-    !canBeDivisor(number, prime) || math.modulo(number, prime) !== '0');
+const isPrimeWithCache = (number, primes) => {
+    return primes
+        .every(prime => !canBeDivisor(number, prime) || math.modulo(number, prime) !== '0');
 };
 
 const find = (count) => {
 
     let result;
 
+    let primes = cache.getAll();
+
     if (primes.length >= count) {
         result = primes.slice(0, count);
     } else {
-
-        let current = Array.from(primes).pop() || 2;
+        let current = primes[primes.length - 1] || '2';
         while (primes.length < count) {
             current = math.add(current, '2');
-            if (isPrimeWithCache(current)) {
-                primes.push(current);
+            if (isPrimeWithCache(current, primes)) {
+                cache.push(current);
             }
         }
         result = Array.from(primes);
