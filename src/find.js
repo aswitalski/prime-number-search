@@ -6,7 +6,7 @@ const primes = ['2', '3'];
 
 const isPrime = (number) => {
     let divisor = 2;
-    while (math.isGreater(number, String(divisor))) {
+    while (math.compare(number, String(divisor)) === 1) {
         if (math.isDivisible(number, String(divisor))) {
             return false;
         } else {

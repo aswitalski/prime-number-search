@@ -1,33 +1,34 @@
 'use strict';
 
-const toDigits = (number) => {
+const getDigits = (number) => {
     if (number instanceof Array) {
         return number;
-    } else if (number instanceof Number) {
+    } else if (typeof number === 'number') {
         return String(number).split('').map(Number);
-    } else {
+    } else if (typeof number === 'string') {
         return number.match(/(0*)(\d+)/)[2].split('').map(Number);
+    } else {
+        throw 'Illegal argument: ' + number;
     }
 };
 
-const isGreater = (number, secondNumber) => {
-    if (number.length === secondNumber.length) {
-        for (let i = 0; i < number.length; i++) {
-            const digit = Number(number[i]);
-            const secondDigit = Number(secondNumber[i]);
-            if (digit > secondDigit) {
-                return true;
-            } else if (digit < secondDigit) {
-                return false;
+const compare = (a, b) => {
+    if (a.length === b.length) {
+        for (let i = 0; i < a.length; i++) {
+            const da = Number(a[i]);
+            const db = Number(b[i]);
+            if (da !== db) {
+                return da > db ? 1 : -1;
             }
         }
-        return null;
+        return 0;
     } else {
-        return number.length > secondNumber.length;
+        return a.length > b.length ? 1 : -1;
     }
 };
 
-const isGreaterOrEqual = (number, secondNumber) => isGreater(number, secondNumber) !== false;
+const isGreaterOrEqual = (a, b) => compare(a, b) >= 0;
+const isGreater = (a, b) => compare(a, b) > 0;
 
 const add = (number, summand) => {
 
@@ -119,9 +120,9 @@ const modulo = (number, divisor) => {
 };
 
 module.exports = {
-    add: (number, summand) => add(toDigits(number), toDigits(summand)).join(''),
-    subtract: (number, subtrahend) => subtract(toDigits(number), toDigits(subtrahend)).join(''),
-    modulo: (number, divisor) => modulo(toDigits(number), toDigits(divisor)).join(''),
-    isGreater: (number, secondNumber) => isGreater(toDigits(number), toDigits(secondNumber)),
-    isDivisible: (number, divisor) => isDivisible(toDigits(number), toDigits(divisor)),
+    add: (number, summand) => add(getDigits(number), getDigits(summand)).join(''),
+    subtract: (number, subtrahend) => subtract(getDigits(number), getDigits(subtrahend)).join(''),
+    modulo: (number, divisor) => modulo(getDigits(number), getDigits(divisor)).join(''),
+    compare: (a, b) => compare(getDigits(a), getDigits(b)),
+    isDivisible: (number, divisor) => isDivisible(getDigits(number), getDigits(divisor)),
 };

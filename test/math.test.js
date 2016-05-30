@@ -8,27 +8,27 @@ describe('Basic string mathematics', () => {
     describe('Number comparison', () => {
 
         it('100 is greater than 99', () => {
-            assert.equal(math.isGreater('100', '99'), true);
+            assert.equal(math.compare('100', '99'), 1);
         });
 
         it('1234 is greater than 1233', () => {
-            assert.equal(math.isGreater('1234', '1233'), true);
+            assert.equal(math.compare('1234', '1233'), 1);
         });
 
         it('99 is not greater than 100', () => {
-            assert.equal(math.isGreater('99', '100'), false);
+            assert.equal(math.compare('99', '100'), -1);
         });
 
         it('14 is not greater than 23', () => {
-            assert.equal(math.isGreater('14', '23'), false);
+            assert.equal(math.compare('14', '23'), -1);
         });
 
         it('666 is not greater than 666', () => {
-            assert.equal(math.isGreater('666', '666'), null);
+            assert.equal(math.compare('666', '666'), 0);
         });
 
         it('15 is equal 15', () => {
-            assert.equal(math.isGreater('15', '15'), null);
+            assert.equal(math.compare('15', '15'), 0);
         });
     });
 

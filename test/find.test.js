@@ -13,6 +13,12 @@ describe('Primary Numbers', () => {
             assert.deepEqual(primes, ['2']);
         });
 
+        it('returns 2, 3, 5 as the first three prime numbers', () => {
+
+            const primes = find(3);
+            assert.deepEqual(primes, ['2', '3', '5']);
+        });
+
         it('returns 2, 3, 5, 7, 11, 13, 17 as first seven prime numbers', () => {
             const primes = find(7);
             assert.deepEqual(primes, ['2', '3', '5', '7', '11', '13', '17']);
