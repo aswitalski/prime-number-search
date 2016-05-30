@@ -16,9 +16,24 @@ const isPrime = (number) => {
     return true;
 };
 
+const canBeDivisor = (number, divisor) => {
+    const maxLength = parseInt((number.length + 1) / 2);
+    if (divisor.length > maxLength) {
+        return false;
+    } else if (divisor.length < maxLength) {
+        return true;
+    } else {
+        const maxFirstDigit = [
+            [0, 4, 5, 6, 7, 7, 8, 8, 9, 9],
+            [0, 1, 1, 1, 2, 2, 2, 2, 2, 3]
+        ];
+        return divisor[0] <= maxFirstDigit[number.length % 2][number[0]];
+    }
+};
+
 const isPrimeWithCache = (number) => {
     return primes.every(prime =>
-    prime.length > (number.length + 1) / 2 || math.modulo(number, prime) !== '0');
+    !canBeDivisor(number, prime) || math.modulo(number, prime) !== '0');
 };
 
 const find = (count) => {
