@@ -8,20 +8,17 @@ const isPrime = (number) => {
     let divisor = 2;
     while (math.isGreater(number, String(divisor))) {
         if (math.isDivisible(number, String(divisor))) {
-            //console.log(`Number ${number} is not prime, it's divisible by ${divisor}`);
             return false;
         } else {
-            divisor++;
+            divisor = divisor === 2 ? 3 : divisor + 2;
         }
     }
-    //console.log(`Number ${number} is prime`);
     return true;
-    //}
 };
 
 const isPrimeWithCache = (number) => {
     return primes.every(prime =>
-    prime.length > (number.length + 1) / 2 || math.modulo(number, prime) !== 0);
+    prime.length > (number.length + 1) / 2 || math.modulo(number, prime) !== '0');
 };
 
 const find = (count) => {
@@ -33,27 +30,18 @@ const find = (count) => {
     } else {
 
         let current = Array.from(primes).pop() || 2;
-        //console.log('Last known prime number:', current);
-
         while (primes.length < count) {
-            current = String(Number(current) + 2); // TODO: use own math mechanism
-            //console.log('Checking:', current);
+            current = math.add(current, '2');
             if (isPrimeWithCache(current)) {
                 primes.push(current);
-                //if (primes.length % 100 === 0) {
-                //    console.log(`Found new prime number (${primes.length}):`, current);
-                //}
             }
-            //console.log('Current:', current);
         }
         result = Array.from(primes);
     }
 
-    //console.log('  => Found primes:', primes);
     return result;
 };
 
 find.isPrime = isPrime;
 
-// noinspection JSUnresolvedVariable
 module.exports = find;

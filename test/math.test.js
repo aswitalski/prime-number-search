@@ -3,7 +3,9 @@
 const math = require('../src/math');
 const assert = require('assert');
 
-describe('Basic string mathematics', () => {
+describe('Basic string mathematics', function() {
+
+    this.timeout(15 * 60 * 1000);
 
     describe('Number comparison', () => {
 
@@ -32,6 +34,21 @@ describe('Basic string mathematics', () => {
         });
     });
 
+    describe('Addition', () => {
+
+        it('99 + 1 = 100', () => {
+            assert.equal(math.add('99', '1'), '100');
+        });
+
+        it('999 + 888 = 1887', () => {
+            assert.equal(math.add('999', '888'), '1887');
+        });
+
+        it('451 + 548 = 999', () => {
+            assert.equal(math.add('451', '548'), '999');
+        });
+    });
+
     describe('Subtraction', () => {
 
         it('100 - 99 = 1', () => {
@@ -46,9 +63,22 @@ describe('Basic string mathematics', () => {
             assert.equal(math.subtract('12345678', '2345679'), '9999999');
         });
 
-        it('1 - 2 = ERROR', () => {
-            assert.throws(math.subtract.bind('1', '2'));
+        it('5 - 5 = 0', () => {
+            assert.equal(math.subtract('5', '5'), '0');
         });
+
+        it('99 - 99 = 0', () => {
+            assert.equal(math.subtract('99', '099'), '0');
+        });
+
+        it('1 - 2 = -1', () => {
+            assert.equal(math.subtract('1', '2'), '-1');
+        });
+
+        it('12345678 - 23456789 = -11111111', () => {
+            assert.equal(math.subtract('12345678', '23456789'), '-11111111');
+        });
+
     });
 
     describe('Divisibility', () => {

@@ -12,13 +12,12 @@ describe('Primary Numbers', function() {
         it('returns 2 as the first prime number', () => {
 
             const primes = find(1);
-            assert.deepEqual(primes, [2]);
+            assert.deepEqual(primes, ['2']);
         });
 
         it('returns 2, 3, 5, 7, 11, 13, 17 as first seven prime numbers', () => {
-
             const primes = find(7);
-            assert.deepEqual(primes, [2, 3, 5, 7, 11, 13, 17]);
+            assert.deepEqual(primes, ['2', '3', '5', '7', '11', '13', '17']);
         });
 
         it('The 100th prime number is 541', () => {
