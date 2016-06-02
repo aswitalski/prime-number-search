@@ -49,6 +49,9 @@ const find = (count) => {
             current = math.add(current, '2');
             if (isPrimeWithCache(current, primes)) {
                 cache.push(current);
+                if (primes.length % 1000 === 0 && count > primes.length) {
+                    console.log(` => ${primes.length}th: ${current}`);
+                }
             }
         }
         result = Array.from(primes);
