@@ -23,10 +23,15 @@ const canBeDivisor = (number, divisor) => {
         return true;
     } else {
         const maxFirstDigit = [
-            [0, 4, 5, 6, 7, 7, 8, 8, 9, 9],
-            [0, 1, 1, 1, 2, 2, 2, 2, 2, 3]
+            [0, 44, 54, 63, 70, 77, 83, 89, 94, 99],
+            [0, 14, 17, 19, 22, 24, 26, 28, 29, 31]
         ];
-        return divisor[0] <= maxFirstDigit[number.length % 2][number[0]];
+        const max = maxFirstDigit[number.length % 2][number[0]];
+        if (number.length === 1) {
+            return Number(divisor[0]) <= parseInt(max / 10);
+        } else {
+            return divisor.substring(0, 2) <= max;
+        }
     }
 };
 
